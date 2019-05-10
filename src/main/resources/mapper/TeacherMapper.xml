@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manage.teacher.dao.TeacherMapper">
+  <resultMap id="BaseResultMap" type="com.manage.teacher.pojo.Teacher">
+    <id column="TID" jdbcType="INTEGER" property="tid" />
+    <result column="TNAME" jdbcType="VARCHAR" property="tname" />
+    <result column="TSEX" jdbcType="VARCHAR" property="tsex" />
+    <result column="BIRTHDAY" jdbcType="VARCHAR" property="birthday" />
+    <result column="PHONE" jdbcType="VARCHAR" property="phone" />
+    <result column="SCHOOL" jdbcType="VARCHAR" property="school" />
+    <result column="TITLEID" jdbcType="INTEGER" property="titleid" />
+    <result column="DEPTID" jdbcType="INTEGER" property="deptid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    TID, TNAME, TSEX, BIRTHDAY, PHONE, SCHOOL, TITLEID, DEPTID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from teacher
+    where TID = #{tid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from teacher
+    where TID = #{tid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.manage.teacher.pojo.Teacher">
+    insert into teacher (TID, TNAME, TSEX, 
+      BIRTHDAY, PHONE, SCHOOL, 
+      TITLEID, DEPTID)
+    values (#{tid,jdbcType=INTEGER}, #{tname,jdbcType=VARCHAR}, #{tsex,jdbcType=VARCHAR}, 
+      #{birthday,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}, 
+      #{titleid,jdbcType=INTEGER}, #{deptid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.manage.teacher.pojo.Teacher">
+    insert into teacher
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tid != null">
+        TID,
+      </if>
+      <if test="tname != null">
+        TNAME,
+      </if>
+      <if test="tsex != null">
+        TSEX,
+      </if>
+      <if test="birthday != null">
+        BIRTHDAY,
+      </if>
+      <if test="phone != null">
+        PHONE,
+      </if>
+      <if test="school != null">
+        SCHOOL,
+      </if>
+      <if test="titleid != null">
+        TITLEID,
+      </if>
+      <if test="deptid != null">
+        DEPTID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tid != null">
+        #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="tname != null">
+        #{tname,jdbcType=VARCHAR},
+      </if>
+      <if test="tsex != null">
+        #{tsex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null">
+        #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="titleid != null">
+        #{titleid,jdbcType=INTEGER},
+      </if>
+      <if test="deptid != null">
+        #{deptid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.manage.teacher.pojo.Teacher">
+    update teacher
+    <set>
+      <if test="tname != null">
+        TNAME = #{tname,jdbcType=VARCHAR},
+      </if>
+      <if test="tsex != null">
+        TSEX = #{tsex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        BIRTHDAY = #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null">
+        SCHOOL = #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="titleid != null">
+        TITLEID = #{titleid,jdbcType=INTEGER},
+      </if>
+      <if test="deptid != null">
+        DEPTID = #{deptid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where TID = #{tid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.manage.teacher.pojo.Teacher">
+    update teacher
+    set TNAME = #{tname,jdbcType=VARCHAR},
+      TSEX = #{tsex,jdbcType=VARCHAR},
+      BIRTHDAY = #{birthday,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      SCHOOL = #{school,jdbcType=VARCHAR},
+      TITLEID = #{titleid,jdbcType=INTEGER},
+      DEPTID = #{deptid,jdbcType=INTEGER}
+    where TID = #{tid,jdbcType=INTEGER}
+  </update>
+</mapper>

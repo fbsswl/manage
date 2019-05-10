@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manage.teacher.dao.ItemMapper">
+  <resultMap id="BaseResultMap" type="com.manage.teacher.pojo.Item">
+    <id column="ITEMID" jdbcType="INTEGER" property="itemid" />
+    <result column="ITEMNAME" jdbcType="VARCHAR" property="itemname" />
+    <result column="ITEMROLE" jdbcType="VARCHAR" property="itemrole" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ITEMID, ITEMNAME, ITEMROLE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from item
+    where ITEMID = #{itemid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from item
+    where ITEMID = #{itemid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.manage.teacher.pojo.Item">
+    insert into item (ITEMID, ITEMNAME, ITEMROLE
+      )
+    values (#{itemid,jdbcType=INTEGER}, #{itemname,jdbcType=VARCHAR}, #{itemrole,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.manage.teacher.pojo.Item">
+    insert into item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="itemid != null">
+        ITEMID,
+      </if>
+      <if test="itemname != null">
+        ITEMNAME,
+      </if>
+      <if test="itemrole != null">
+        ITEMROLE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="itemid != null">
+        #{itemid,jdbcType=INTEGER},
+      </if>
+      <if test="itemname != null">
+        #{itemname,jdbcType=VARCHAR},
+      </if>
+      <if test="itemrole != null">
+        #{itemrole,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.manage.teacher.pojo.Item">
+    update item
+    <set>
+      <if test="itemname != null">
+        ITEMNAME = #{itemname,jdbcType=VARCHAR},
+      </if>
+      <if test="itemrole != null">
+        ITEMROLE = #{itemrole,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ITEMID = #{itemid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.manage.teacher.pojo.Item">
+    update item
+    set ITEMNAME = #{itemname,jdbcType=VARCHAR},
+      ITEMROLE = #{itemrole,jdbcType=VARCHAR}
+    where ITEMID = #{itemid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manage.teacher.dao.RewordMapper">
+  <resultMap id="BaseResultMap" type="com.manage.teacher.pojo.Reword">
+    <id column="REWORDID" jdbcType="INTEGER" property="rewordid" />
+    <result column="REWORDNAME" jdbcType="VARCHAR" property="rewordname" />
+    <result column="DEPTID" jdbcType="INTEGER" property="deptid" />
+    <result column="LEVEL" jdbcType="INTEGER" property="level" />
+    <result column="TIME" jdbcType="TIMESTAMP" property="time" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    REWORDID, REWORDNAME, DEPTID, LEVEL, TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from reword
+    where REWORDID = #{rewordid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from reword
+    where REWORDID = #{rewordid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.manage.teacher.pojo.Reword">
+    insert into reword (REWORDID, REWORDNAME, DEPTID, 
+      LEVEL, TIME)
+    values (#{rewordid,jdbcType=INTEGER}, #{rewordname,jdbcType=VARCHAR}, #{deptid,jdbcType=INTEGER}, 
+      #{level,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.manage.teacher.pojo.Reword">
+    insert into reword
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rewordid != null">
+        REWORDID,
+      </if>
+      <if test="rewordname != null">
+        REWORDNAME,
+      </if>
+      <if test="deptid != null">
+        DEPTID,
+      </if>
+      <if test="level != null">
+        LEVEL,
+      </if>
+      <if test="time != null">
+        TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rewordid != null">
+        #{rewordid,jdbcType=INTEGER},
+      </if>
+      <if test="rewordname != null">
+        #{rewordname,jdbcType=VARCHAR},
+      </if>
+      <if test="deptid != null">
+        #{deptid,jdbcType=INTEGER},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.manage.teacher.pojo.Reword">
+    update reword
+    <set>
+      <if test="rewordname != null">
+        REWORDNAME = #{rewordname,jdbcType=VARCHAR},
+      </if>
+      <if test="deptid != null">
+        DEPTID = #{deptid,jdbcType=INTEGER},
+      </if>
+      <if test="level != null">
+        LEVEL = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="time != null">
+        TIME = #{time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where REWORDID = #{rewordid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.manage.teacher.pojo.Reword">
+    update reword
+    set REWORDNAME = #{rewordname,jdbcType=VARCHAR},
+      DEPTID = #{deptid,jdbcType=INTEGER},
+      LEVEL = #{level,jdbcType=INTEGER},
+      TIME = #{time,jdbcType=TIMESTAMP}
+    where REWORDID = #{rewordid,jdbcType=INTEGER}
+  </update>
+</mapper>
